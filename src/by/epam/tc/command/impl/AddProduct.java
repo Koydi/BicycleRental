@@ -37,7 +37,7 @@ public class AddProduct implements Command {
         } catch (ServiceException e) {
             response.setErrorStatus(true);
             response.setErrorMessage(e.getMessage());
-            e.printStackTrace();
+            e.printStackTrace();// а логирование где?
         }
 
         return response;
