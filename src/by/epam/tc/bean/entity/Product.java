@@ -1,6 +1,6 @@
 package by.epam.tc.bean.entity;
 
-public class Product {
+public class Product {//equals, hashcode, toString где?
     private int cost;
     private String name;
 
