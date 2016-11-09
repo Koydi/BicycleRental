@@ -11,12 +11,13 @@ public class AddProduct implements AddProductService {
     @Override
     public void add(String categoryName, String name, String cost, String number) throws ServiceException {
         // проверка входных данных
+        // ну и где проверка входных данных?
         DAOFactory daoFactory = DAOFactory.getInstance();
         DataBaseDAO dataBaseDAO = daoFactory.getDataBaseDAO();
         try {
             dataBaseDAO.addProduct(categoryName, name, cost, number);
         } catch (DAOException e) {
-            throw new ServiceException();
+            throw new ServiceException();// почему исключение потерял? зачем ты так с DAOException
         }
 
     }
