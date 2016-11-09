@@ -6,16 +6,20 @@ import by.epam.tc.dao.exception.DAOException;
 
 import java.sql.*;
 
-public class DataBaseDAO implements DAO{
 
-    private Connection connection;
+// ну вот, код надо было написать самим - и понеслось
+public class DataBaseDAO implements DAO{
+    // а где пул соединений?
+
+    private Connection connection;// объект этого класса используется в единственном экземпляре, тогда при многопоточном
+    // доступе твои клиенты что, будут делить один connection на всех?
 
     public DataBaseDAO() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bicycles?useSSL=false", "root", "123456");
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            e.printStackTrace();// ну не создалось соединение, ну и фиг с ним, тихонько погасим и будет надеяться на светлое будущее
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -26,17 +30,17 @@ public class DataBaseDAO implements DAO{
         Statement statement;
         try {
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("INSERT INTO product(name, id_category, cost, number) VALUES(");
+            stringBuilder.append("INSERT INTO product(name, id_category, cost, number) VALUES(");// неименованная константная строка
             stringBuilder.append("\"" + productName + "\",");
             String categoryId = getCategoryId(categoryName);
             stringBuilder.append(categoryId + ",");
             stringBuilder.append(cost + ",");
             stringBuilder.append(number + ");");
 
-            statement = connection.createStatement();
+            statement = connection.createStatement();// а PreparedStatement тебе религия использовать не велит?
             statement.execute(stringBuilder.toString());
         } catch (SQLException e) {
-            throw new DAOException();
+            throw new DAOException();// опять исключение потерял
         }
     }
 
