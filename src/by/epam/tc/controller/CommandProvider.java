@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class CommandProvider {
     private HashMap<Commands, Command> commands = new HashMap();
 
-    CommandProvider() {
+    CommandProvider() {// public класс, friendly единственный конструктор - зачем? 
         commands.put(Commands.ADD_PRODUCT, new AddProduct());
         commands.put(Commands.DELETE_PRODUCT, new DeleteProduct());
         commands.put(Commands.EDIT_PRODUCT, new EditProduct());
